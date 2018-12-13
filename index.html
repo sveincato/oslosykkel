@@ -1,0 +1,46 @@
+
+<html>
+	<head>
+	<script type="text/javascript" charset="utf-8" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+
+	<script language="JavaScript" type="text/javascript">
+		$(document).ready(function () {
+		
+					
+			$("#getInfo").click(function (){
+				if($("#client").val()!= ''){
+					var identifier = {'Identifier': ""+$("#client").val() };
+									
+					$.get( "stations.php",identifier, function( data ) {
+					
+						var arr = $.parseJSON(data);
+						$('#result').append('<table id="table" style="width:100%;border: 1px solid black"><tr><th>Location</th><th>Bikes</th><th>Locks</th></tr></table>');
+			
+						for(var x = 0; x < arr.length; x++) {
+							$('#table').append('<tr><td>'+arr[x][0]+ '</td><td>'+arr[x][2]+  '</td><td>'+arr[x][3]+ '</td></tr>');
+						}
+						
+					});
+				}else{
+					alert("please input an api key");
+				}
+		    });
+
+				
+		}); //document ready
+
+	</script
+	<title>Bysykkel</title>
+	</head>
+	<body>
+		
+		<p>Insert API key
+		<div>
+			<input style="width:400px" id="client"></input>
+			<p>
+			<button id="getInfo" type="button">Get information</button>
+		</div>
+		<div id="result"></div>
+	</body>
+</html> 
